@@ -11,5 +11,6 @@ public interface IFilmesService {
     public Integer add(Filme filme);
     public void update(final Filme filme);
     public void delete(Integer id);
+    public void nota (Integer nota);
     
 }

@@ -1,6 +1,5 @@
 package br.com.efipee.filmes.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,46 +22,36 @@ import br.com.efipee.filmes.service.FilmeService;
 @RequestMapping("/filme")
 public class FilmesController {
 
-    private final List<Filme> filmes;
-
     @Autowired
     private FilmeService filmeService;
 
-    public FilmesController() {
-        this.filmes = new ArrayList<>();
-    }
-
     @GetMapping
-    public List<Filme> listarFilmes(@RequestParam(required = false) String movie){
+    public List<Filme> listarFilmes(@RequestParam(required = false) String movie) {
         return filmeService.listarFilmes(movie);
     }
 
-    @GetMapping("/id")
-    public Filme acharPeloId(@PathVariable("id") Integer id){
+    @GetMapping("/{id}")
+    public Filme acharPeloId(@PathVariable("id") Integer id) {
         return filmeService.acharPeloId(id);
     }
 
     @PostMapping
-    public ResponseEntity<Integer> add(@RequestBody Filme filme){
+    public ResponseEntity<Integer> add(@RequestBody Filme filme) {
         filmeService.add(filme);
         return new ResponseEntity<>(filme.getId(), HttpStatus.CREATED);
     }
 
     @PutMapping
-    public ResponseEntity update(@RequestBody final Filme filme){
+    public ResponseEntity update(@RequestBody final Filme filme) {
         filmeService.update(filme);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @DeleteMapping("/id")
-    public ResponseEntity delete(@PathVariable("id") Integer id){
+    @DeleteMapping("/{id}")
+    public ResponseEntity delete(@PathVariable("id") Integer id) {
         filmeService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
     }
 
-
-
-    
-        
 }

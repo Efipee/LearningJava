@@ -1,6 +1,5 @@
 package br.com.efipee.filmes.entities;
 
-
 public class Filme {
 
     private Integer id;
@@ -17,7 +16,6 @@ public class Filme {
         this.setDiretor(diretor);
     }
 
-
     public String getDiretor() {
         return diretor;
     }
@@ -25,8 +23,6 @@ public class Filme {
     public void setDiretor(String diretor) {
         this.diretor = diretor;
     }
-
-
 
     public String getNomeFilme() {
         return nomeFilme;
@@ -36,8 +32,6 @@ public class Filme {
         this.nomeFilme = nomeFilme;
     }
 
-
-
     public Integer getNota() {
         return nota;
     }
@@ -45,8 +39,6 @@ public class Filme {
     public void setNota(Integer nota) {
         this.nota = nota;
     }
-
-
 
     public Integer getAno() {
         return ano;
@@ -56,7 +48,6 @@ public class Filme {
         this.ano = ano;
     }
 
-
     public Integer getId() {
         return id;
     }
@@ -65,9 +56,9 @@ public class Filme {
         this.id = id;
     }
 
-    public String toString(){
-        return  this.getNomeFilme();
-        
+    public String toString() {
+        return this.getNomeFilme() + this.getDiretor();
+
     }
 
 }

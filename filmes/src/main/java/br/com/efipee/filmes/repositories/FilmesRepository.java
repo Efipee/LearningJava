@@ -16,8 +16,6 @@ public class FilmesRepository {
         this.filmes = new ArrayList<>();
     }
 
-    
-
     public static FilmesRepository getInstance() {
         if (filmesRepository == null) {
             filmesRepository = new FilmesRepository();
@@ -38,24 +36,53 @@ public class FilmesRepository {
     }
 
     public void update(final Filme movie) {
-        filmes.stream().filter(film -> film.getId().equals(film.getId()))
-                .forEach(film -> film.setNomeFilme(film.getNomeFilme()));
+        filmes.stream().filter(film -> film.getId().equals(movie.getId()))
+                .forEach(film -> film.setNomeFilme(movie.getNomeFilme()));
+                //
+        filmes.stream().filter(film -> film.getId().equals(movie.getId()))
+                .forEach(film -> film.setAno(movie.getAno()));        
+                //
+        filmes.stream().filter(film -> film.getId().equals(movie.getId()))
+                .forEach(film -> film.setDiretor(movie.getDiretor()));      
+                //          
+        filmes.stream().filter(film -> film.getId().equals(movie.getId()))
+                .forEach(film -> film.setNota(movie.getNota()));                 
+                
     }
 
     public void delete(Integer id) {
-        filmes.removeIf(film -> film.getId().equals(id));
+        this.filmes.removeIf(movie -> movie.getId().equals(id));
     }
 
-    public void add(Filme movie) {
-        if(this.filmes.contains(movie)){
-            System.out.println("Já existe no catálogo");
+    public boolean containsID(final Filme array) {
+        for (Filme f : filmes)
+            if (f.getId().equals(array.getId())) {
+                return true;
+            }
+        return false;
+    }
+
+    public void notaArredondada(Filme filme) {
+        if (filme.getNota() > 5) {
+            filme.setNota(5);
+
+            int nota = filme.getNota();
+            filme.setNota(Math.round(nota));
         }
-            System.out.println("Filme adicionado");
-        this.filmes.add(movie);
     }
 
-    public int count() {
-        return filmes.size();
-    }
+    // if (this.filmes.toString().contains(filme.getNomeFilme())) {
+    public void add(Filme filme) {
 
+        if (this.filmes.toString().contains(filme.toString())) { // Verificando se já existe um filme
+            System.out.println("Filme já existe no catálogo!");
+            return;
+        } else if (!this.filmes.toString().contains(filme.getNomeFilme())
+                || filmesRepository.containsID(filme) == true) {
+            filme.setId(this.filmes.size() + 1);
+            this.filmes.add(filme);
+            filmesRepository.notaArredondada(filme); // Arredondar nota
+            System.out.println("Filme " + filme.getNomeFilme() + " adicionado com sucesso");
+        }
+    }
 }
