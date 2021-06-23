@@ -71,15 +71,17 @@ public class FilmesRepository {
         }
     }
 
+    public void verifyId(Filme id){
+        if(id.getId() == null || filmesRepository.containsID(id)  == true){
+            id.setId(this.filmes.size() + 1);
+        }
+    }
+
     // if (this.filmes.toString().contains(filme.getNomeFilme())) {
     public void add(Filme filme) {
-
         if (this.filmes.toString().contains(filme.toString())) { // Verificando se já existe um filme
             System.out.println("Filme já existe no catálogo!");
-            return;
-        } else if (!this.filmes.toString().contains(filme.getNomeFilme())
-                || filmesRepository.containsID(filme) == true) {
-            filme.setId(this.filmes.size() + 1);
+        } else {
             this.filmes.add(filme);
             filmesRepository.notaArredondada(filme); // Arredondar nota
             System.out.println("Filme " + filme.getNomeFilme() + " adicionado com sucesso");

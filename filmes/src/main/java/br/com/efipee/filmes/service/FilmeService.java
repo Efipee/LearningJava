@@ -32,13 +32,12 @@ public class FilmeService implements IFilmesService {
     }
 
     public Integer add(Filme filme) {
+        filmesRepository.verifyId(filme);
         filmesRepository.add(filme);
         return filme.getId();
     }
 
-    @Override
-    public void nota(Integer nota) {
-        // TODO Auto-generated method stub
-        
-    }
+
+
+
 }
